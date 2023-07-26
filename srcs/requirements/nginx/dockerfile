@@ -1,6 +1,6 @@
 FROM debian:buster
-RUN apt-get -y update && apt-get -y upgrade && apt-get -y install nginx
+RUN apt-get -y update && apt-get -y upgrade && apt-get -y install nginx curl less
 RUN apt-get install -y openssl
-COPY .conf /etc/nginx/sites-available/.conf
-EXPOSE 443
+COPY wordpress.conf /etc/nginx/sites-available/default
+EXPOSE 80
 CMD ["/usr/sbin/nginx", "-g", "daemon off;"]

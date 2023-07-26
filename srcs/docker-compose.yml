@@ -1,0 +1,29 @@
+version: '3'
+services:
+
+  nginx:
+    container_name: "nginx"
+    build: "./requirements/nginx"
+    ports:
+      - "5000:80"
+    volumes:
+      - "wordpress:/var/www/wordpress"
+
+  wordpress:
+    container_name: "wordpress"
+    build: "./requirements/wordpress"
+    volumes:
+      - "wordpress:/var/www/wordpress"
+
+  mariadb:
+    container_name: mariadb
+    build: "./requirements/mariadb"
+    volumes:
+      - "DB:/var/lib/mysql"
+
+networks:
+  default:
+
+volumes:
+  DB:
+  wordpress:
