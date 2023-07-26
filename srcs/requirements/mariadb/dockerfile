@@ -2,8 +2,6 @@ FROM debian:buster
 WORKDIR /
 RUN apt-get update -y && apt-get upgrade -y
 RUN apt-get install -y mariadb-server curl
-COPY start.sh /start.sh
-RUN chmod +x /start.sh
 RUN service mysql start && mysql -h localhost -e "CREATE DATABASE IF NOT EXISTS wordpress; CREATE USER 'wordpress'@'%' IDENTIFIED BY '123456'; GRANT ALL PRIVILEGES ON * . * TO 'wordpress'@'%'; ALTER USER 'root'@'localhost' IDENTIFIED BY 'root'; FLUSH PRIVILEGES;"
 EXPOSE 3306
 ENTRYPOINT [ "mysqld", "--bind-address=mariadb" ]
