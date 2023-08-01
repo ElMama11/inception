@@ -3,23 +3,35 @@ services:
 
   nginx:
     container_name: "nginx"
-    build: "./requirements/nginx"
+    build: 
+      context: "./requirements/nginx"
     ports:
       - "5000:80"
     volumes:
-      - "wordpress:/var/www/wordpress"
+      - "wordpress:/var/www/html/wordpress"
 
   wordpress:
     container_name: "wordpress"
-    build: "./requirements/wordpress"
+    build:
+      context: "./requirements/wordpress"
     volumes:
-      - "wordpress:/var/www/wordpress"
+      - "wordpress:/var/www/html/wordpress"
+    env_file:
+      - .env
 
   mariadb:
     container_name: mariadb
-    build: "./requirements/mariadb"
+    build:
+      context: "./requirements/mariadb"
+      args:
+        DB_DATABASE: ${DB_DATABASE}
+        DB_USER: ${DB_USER}
+        DB_USER_PASSWORD: ${DB_USER_PASSWORD}
+        DB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
     volumes:
       - "DB:/var/lib/mysql"
+    env_file:
+      - .env
 
 networks:
   default:

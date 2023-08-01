@@ -1,7 +1,12 @@
 FROM debian:buster
+ARG DB_USER
+ARG DB_DATABASE
+ARG DB_USER_PASSWORD
+ARG DB_ROOT_PASSWORD
 WORKDIR /
 RUN apt-get update -y && apt-get upgrade -y
 RUN apt-get install -y mariadb-server curl
-RUN service mysql start && mysql -h localhost -e "CREATE DATABASE IF NOT EXISTS wordpress; CREATE USER 'wordpress'@'%' IDENTIFIED BY '123456'; GRANT ALL PRIVILEGES ON * . * TO 'wordpress'@'%'; ALTER USER 'root'@'localhost' IDENTIFIED BY 'root'; FLUSH PRIVILEGES;"
+RUN service mysql start && mysql -h localhost -e "CREATE DATABASE IF NOT EXISTS $DB_DATABASE; ALTER USER 'root'@'localhost' IDENTIFIED BY '$DB_ROOT_PASSWORD'; GRANT ALL PRIVILEGES ON $DB_DATABASE.* TO '$DB_USER'@'%' IDENTIFIED BY '$DB_USER_PASSWORD'; FLUSH PRIVILEGES;"
+
 EXPOSE 3306
 ENTRYPOINT [ "mysqld", "--bind-address=mariadb" ]
