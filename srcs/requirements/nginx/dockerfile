@@ -1,6 +1,11 @@
 FROM debian:buster
 RUN apt-get -y update && apt-get -y upgrade && apt-get -y install nginx curl less
 RUN apt-get install -y openssl
-COPY wordpress.conf /etc/nginx/sites-available/default
-EXPOSE 80
+
+RUN openssl req -x509 -newkey rsa:2048 -nodes -subj /C=FR \
+	-keyout /etc/ssl/mverger.42.fr.key -out /etc/ssl/mverger.42.fr.crt;
+
+COPY wordpress.conf /etc/nginx/sites-available/mverger.42.fr.conf
+RUN		ln -s /etc/nginx/sites-available/mverger.42.fr.conf /etc/nginx/sites-enabled/mverger.42.fr.conf
+EXPOSE 443
 CMD ["/usr/sbin/nginx", "-g", "daemon off;"]
