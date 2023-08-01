@@ -9,6 +9,9 @@ services:
       - "443:443"
     volumes:
       - "wordpress:/var/www/html/wordpress"
+    restart: always
+    depends_on:
+      - wordpress
 
   wordpress:
     container_name: "wordpress"
@@ -18,6 +21,9 @@ services:
       - "wordpress:/var/www/html/wordpress"
     env_file:
       - .env
+    restart: always
+    depends_on:
+      - mariadb
 
   mariadb:
     container_name: mariadb
@@ -32,10 +38,22 @@ services:
       - "DB:/var/lib/mysql"
     env_file:
       - .env
+    restart: always
 
 networks:
   default:
 
 volumes:
   DB:
+    name: DB
+    driver_opts:
+      device: /home/mverger/data/DB
+      type: none
+      o: bind
+
   wordpress:
+    name: wordpress
+    driver_opts:
+      device: /home/mverger/data/wordpress
+      type: none
+      o: bind
