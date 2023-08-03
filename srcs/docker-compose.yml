@@ -24,6 +24,7 @@ services:
     restart: always
     depends_on:
       - mariadb
+    init: true 
 
   mariadb:
     container_name: mariadb

@@ -8,7 +8,7 @@ wp core install --path="/var/www/html/wordpress" --allow-root --url=$DOMAIN_NAME
 
 wp plugin update --allow-root --all
 wp user create --path="/var/www/html/wordpress" --allow-root $WP_USER $WP_USER_EMAIL --user_pass=$WP_USER_PASSWORD
- #wp theme install astra --activate --allow-root
+#wp theme install astra --activate --allow-root
 
 chown www-data:www-data /var/www/html/wordpress/wp-content/uploads -R
 
