@@ -1,4 +1,4 @@
-DOCKER-COMPOSE := docker-compose -f srcs/docker-compose.yml
+DOCKER-COMPOSE := docker compose -f srcs/docker-compose.yml
 
 all: up
 
