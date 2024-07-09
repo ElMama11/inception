@@ -148,12 +148,3 @@ WordPress is the simplest, most popular way to create your own website or blog.
 	<img src="https://kinsta.com/fr/wp-content/uploads/sites/4/2016/08/configuration.png" width="350">
 	<img src="https://docs.ovh.com/de/public-cloud/installation_von_wordpress_auf_einer_instanz/images/wp_install2.png" width="350">
 </p>
-
-
-## PID 1
-
-A process running as PID 1 inside a container is treated specially by Linux: it ignores any signal with the default action. As a result, the process will not terminate on SIGINT or SIGTERM unless it is coded to do so.
-
-Process ID 1 is usually the init process primarily responsible for starting and shutting down the system. Originally, process ID 1 was not specifically reserved for init by any technical measures: it simply had this ID as a natural consequence of being the first process invoked by the kernel.
-
-Each process can have child processes, and all have a parent process. All except the very first process, the PID 1. PID 1, also known as init, is the common ancestor of all processes and is the foundation on which all of them run. Thus, you can imagine its importance.
